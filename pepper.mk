@@ -105,5 +105,27 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/sony/pepper/pepper-vendor.mk)
 
+#Boot Animation.
+TARGET_BOOTANIMATION_NAME := vertical-480x854
+
+PRODUCT_COPY_FILES += \
+    vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
+
+#hardware info.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.device.cpu=St-Ericsson_Nova-Thor_U8500 \
+    ro.device.gpu=Mali_400 \
+    ro.device.rear_cam=5MP \
+    ro.device.front_cam=1.3MP \
+    ro.device.screen_res=480x854_Pixels
+
+#fix startup tweaks
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/liberty.cfg:system/etc/liberty.cfg
+
+#fix ota
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/app/UpdateMe.apk:system/app/UpdateMe.apk
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
